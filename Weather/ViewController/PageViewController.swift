@@ -12,7 +12,6 @@ import CoreLocation
 class PageViewController: UIPageViewController, CLLocationManagerDelegate {
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
-           // 페이지뷰의 스타일
            super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
        }
     
@@ -81,29 +80,20 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            // 기존 weatherList 초기화
             self.weatherList.removeAll()
-
-            // 새로운 데이터로 weatherList 다시 설정
             self.setWeatherView()
-            
-            // 선택된 인덱스 가져오기
             let selectedIndex = notification.userInfo?["selectedIndex"] as? Int ?? 0
-            
-            // 페이지 뷰 컨트롤러 업데이트
+    
             if selectedIndex < self.weatherList.count {
                 self.setViewControllers([self.weatherList[selectedIndex]], direction: .forward, animated: false, completion: nil)
             }
             
-            // 페이지 컨트롤 업데이트
             self.pageControl.numberOfPages = self.weatherList.count
             self.pageControl.currentPage = selectedIndex
             
-            // 데이터 소스와 델리게이트 메서드 호출을 통해 UI 업데이트
             self.dataSource?.pageViewController(self, viewControllerBefore: self.weatherList[selectedIndex])
             self.dataSource?.pageViewController(self, viewControllerAfter: self.weatherList[selectedIndex])
             
-            // 필요한 경우 view를 강제로 다시 그리기
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }

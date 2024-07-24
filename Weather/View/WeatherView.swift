@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Gifu
 
 final class WeatherView: UIView {
     let setWeatherImage = SetWeatherImage()

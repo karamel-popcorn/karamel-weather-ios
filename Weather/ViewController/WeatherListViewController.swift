@@ -131,7 +131,6 @@ extension WeatherListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-          // 0번째 행에 대해 편집 기능 비활성화
           return indexPath.row != 0
       }
     
@@ -142,7 +141,6 @@ extension WeatherListViewController: UITableViewDelegate {
             }
     
             let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-                // 액션 처리 코드
                 tableView.beginUpdates()
                 WeatherListDataManager.shared.deleteWeatherList(id: self.weatherListItem[indexPath.row].id)
                 self.fetchWeather(manager: self.dataManager)

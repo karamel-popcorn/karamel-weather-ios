@@ -161,7 +161,6 @@ class SearchViewController: UIViewController {
 
     // MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
-    /// 검색 결과 선택 시에 (취소/추가)버튼이 있는 VC이 보여야 함
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedResult = searchResults[indexPath.row]
         let searchReqeust = MKLocalSearch.Request(completion: selectedResult)
@@ -220,13 +219,12 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: MKLocalSearchCompleterDelegate {
     // 자동완성 완료 시에 결과를 받는 함수
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        // completer.results를 통해 검색한 결과를 searchResults에 담아줍니다
+        // completer.results를 통해 검색한 결과를 searchResults에 담아준다
         searchResults = completer.results
         searchTableView.reloadData()
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        // 에러 확인
         print(error.localizedDescription)
     }
 }

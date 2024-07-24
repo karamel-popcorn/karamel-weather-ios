@@ -10,7 +10,6 @@
 		14015FB92B7CEC8B00283638 /* ReuseIdentifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14015FB82B7CEC8B00283638 /* ReuseIdentifying.swift */; };
 		1416FD992BFDCA5D0067F400 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1416FD982BFDCA5D0067F400 /* UserInfo.swift */; };
 		14288D382AB4570100726969 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14288D372AB4570100726969 /* WeatherView.swift */; };
-		14288D3D2AE9646100726969 /* rain.gif in Resources */ = {isa = PBXBuildFile; fileRef = 14288D3C2AE9646100726969 /* rain.gif */; };
 		142E29F02B3DBB420013E9F1 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142E29EF2B3DBB420013E9F1 /* LocationService.swift */; };
 		142E29F22B4EC0C80013E9F1 /* ResponseCityDataFromLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142E29F12B4EC0C80013E9F1 /* ResponseCityDataFromLocation.swift */; };
 		142E29F42B582A3C0013E9F1 /* CityInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142E29F32B582A3C0013E9F1 /* CityInformation.swift */; };
@@ -87,7 +86,6 @@
 		14015FB82B7CEC8B00283638 /* ReuseIdentifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifying.swift; sourceTree = "<group>"; };
 		1416FD982BFDCA5D0067F400 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		14288D372AB4570100726969 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
-		14288D3C2AE9646100726969 /* rain.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = rain.gif; path = ../../../../rain.gif; sourceTree = "<group>"; };
 		142E29EF2B3DBB420013E9F1 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		142E29F12B4EC0C80013E9F1 /* ResponseCityDataFromLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCityDataFromLocation.swift; sourceTree = "<group>"; };
 		142E29F32B582A3C0013E9F1 /* CityInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInformation.swift; sourceTree = "<group>"; };
@@ -156,14 +154,6 @@
 				1416FD982BFDCA5D0067F400 /* UserInfo.swift */,
 			);
 			path = Singleton;
-			sourceTree = "<group>";
-		};
-		14288D3B2AE963FF00726969 /* WeatherGIF */ = {
-			isa = PBXGroup;
-			children = (
-				14288D3C2AE9646100726969 /* rain.gif */,
-			);
-			path = WeatherGIF;
 			sourceTree = "<group>";
 		};
 		1455D40A2BDA5FEC00854936 /* Protocol */ = {
@@ -248,7 +238,6 @@
 				1482F69F2BAB383C00820854 /* ViewController */,
 				14A0499F2B20D5430052666E /* Model */,
 				14A0499A2B20D0830052666E /* API */,
-				14288D3B2AE963FF00726969 /* WeatherGIF */,
 				14E123A22A6EA99000D14D6C /* Enum */,
 				14E1239F2A6EA81200D14D6C /* Extension */,
 				14E1239A2A6EA48200D14D6C /* View */,
@@ -405,7 +394,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14E123922A6E9B6600D14D6C /* LaunchScreen.storyboard in Resources */,
-				14288D3D2AE9646100726969 /* rain.gif in Resources */,
 				14E1238F2A6E9B6600D14D6C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,6 +631,8 @@
 				DEVELOPMENT_TEAM = TFSCQ2RS8U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Weather;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치사용을 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -673,6 +663,8 @@
 				DEVELOPMENT_TEAM = TFSCQ2RS8U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Weather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Weather;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치사용을 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

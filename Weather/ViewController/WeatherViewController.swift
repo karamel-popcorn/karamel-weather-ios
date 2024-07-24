@@ -89,16 +89,6 @@ class WeatherViewController: UIViewController {
         return view
     }()
     
-    let cityListViewButton: ButtonTouchSizeUp = {
-        let button = ButtonTouchSizeUp()
-        let config = UIImage.SymbolConfiguration(pointSize: 20,weight:.regular ,scale: .default)
-        let image = UIImage(systemName: "list.dash", withConfiguration: config)
-        button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     let cityListAddButton: ButtonTouchSizeUp = {
         let button = ButtonTouchSizeUp()
         let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)
@@ -108,23 +98,13 @@ class WeatherViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    let pageControlView: UIPageControl = {
-        let pagecontrol = UIPageControl()
-        pagecontrol.isUserInteractionEnabled = false
-        pagecontrol.pageIndicatorTintColor = UIColor.lightGray
-        pagecontrol.currentPageIndicatorTintColor = UIColor.white
-        pagecontrol.translatesAutoresizingMaskIntoConstraints = false
-        return pagecontrol
-    }()
-    
+
     override func loadView() {
         super.loadView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cityListViewButton.addTarget(self, action: #selector(setTabbar), for: .touchUpInside)
         cityListAddButton.addTarget(self, action: #selector(addCityButton), for: .touchUpInside)
         locationManager?.delegate = self
         self.collectionView.delegate = self
@@ -132,11 +112,6 @@ class WeatherViewController: UIViewController {
         self.collectionView.register(HourlyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: HourlyWeatherCollectionViewCell.reuseIdentifier)
         setScrollView()
         requestAuthorization()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupPageControl()
     }
     
     private func setScrollView() {
@@ -262,12 +237,6 @@ class WeatherViewController: UIViewController {
         return false
     }
     
-    @objc private func setTabbar() {
-        let weatherListViewCon = WeatherListViewController()
-        weatherListViewCon.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-        self.present(weatherListViewCon, animated: true, completion: nil)
-    }
-    
     @objc private func addCityButton() {
       citySaveDate = Date().timeIntervalSince1970
         let saveCityData = WeatherListItem(id: UUID(), cityNumber: self.cityNumber, cityName: self.cityName, createdAt: citySaveDate, latitude: self.locationLatitude, longitude: self.locationLongitude)
@@ -275,7 +244,7 @@ class WeatherViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("RefreshWeatherList"), object: nil)
         
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-      let weatherListViewCon = WeatherListViewController()
+        let weatherListViewCon = WeatherListViewController()
         weatherListViewCon.modalPresentationStyle = UIModalPresentationStyle.fullScreen
         self.present(weatherListViewCon, animated: true, completion: nil)
     }
@@ -288,9 +257,7 @@ extension WeatherViewController:CLLocationManagerDelegate {
             guard let coordinate = locationManager!.location?.coordinate else { return }
             
             self.getCityList(at: coordinate)
-            
             self.getHourlyWeather()
-            
             self.getDailyWeather()
             guard let locationData = cityListData else { return }
             guard let hourlyData = hourlyWeatherData else { return }
@@ -363,33 +330,22 @@ extension WeatherViewController:CLLocationManagerDelegate {
         if(addNewCityView) {
             if(!checkDuplication()){
                 self.view.addSubview(self.cityListAddButton)
-                //self.weatherScrollView.addSubview(self.cityListAddButton)
             }
         }
         setupConstraint()
-    }
-    
-    private func setupPageControl() {
-        guard let weatherListItems = self.dataManager.fetchWeatherList() else { return }
-        pageControlView.numberOfPages = 1 + weatherListItems.count
-        pageControlView.currentPage = 0
-        pageControlView.setIndicatorImage(UIImage(systemName: "location.fill"), forPage: 0)
     }
 }
 
 extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let data = hourlyWeatherData else { return 0}
-    
         return data.hourlyInformation.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyWeatherCollectionViewCell.reuseIdentifier, for: indexPath) as! HourlyWeatherCollectionViewCell
         guard let data = hourlyWeatherData else { return cell}
-        
         cell.configure(with: data.hourlyInformation[indexPath.row])
-        
         return cell
     }
     
