@@ -75,7 +75,7 @@ class WeatherListViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commoninit()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commoninit()
@@ -87,8 +87,8 @@ class WeatherListViewCell: UITableViewCell {
     }
     
     override func awakeFromNib() {
-           super.awakeFromNib()
-           self.backgroundColor = .gray
+        super.awakeFromNib()
+        self.backgroundColor = .gray
     }
 }
 

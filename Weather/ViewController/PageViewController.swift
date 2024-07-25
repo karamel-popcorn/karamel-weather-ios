@@ -12,11 +12,11 @@ import CoreLocation
 class PageViewController: UIPageViewController, CLLocationManagerDelegate {
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
-           super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
-       }
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
     
     required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     private var locationManager:CLLocationManager?
@@ -83,7 +83,7 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
             self.weatherList.removeAll()
             self.setWeatherView()
             let selectedIndex = notification.userInfo?["selectedIndex"] as? Int ?? 0
-    
+            
             if selectedIndex < self.weatherList.count {
                 self.setViewControllers([self.weatherList[selectedIndex]], direction: .forward, animated: false, completion: nil)
             }
@@ -98,19 +98,19 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
             self.view.layoutIfNeeded()
         }
     }
-
+    
     
     //MARK: - LocationSetting
     private func requestAuthorization() {
-            if locationManager == nil {
-                locationManager = CLLocationManager()
-                locationManager!.desiredAccuracy = kCLLocationAccuracyBest
-                locationManager!.requestWhenInUseAuthorization()
-                locationManager!.delegate = self
-                locationManagerDidChangeAuthorization(locationManager!)
-            }else{
-                locationManager!.startMonitoringSignificantLocationChanges()
-            }
+        if locationManager == nil {
+            locationManager = CLLocationManager()
+            locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager!.requestWhenInUseAuthorization()
+            locationManager!.delegate = self
+            locationManagerDidChangeAuthorization(locationManager!)
+        }else{
+            locationManager!.startMonitoringSignificantLocationChanges()
+        }
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -125,7 +125,7 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
     func setWeatherView() {
         let pageCount = getPageCount()
         guard let weatherSaveList = dataManager.fetchWeatherList() else { return }
-       
+        
         for weatherLists in 0...pageCount {
             let weatherViewController = WeatherViewController()
             if(weatherLists == 0) {
@@ -166,25 +166,26 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
     }
     
     private func updatePageControlAndButton() {
-            guard let currentViewController = viewControllers?.first,
-                  let currentIndex = weatherList.firstIndex(of: currentViewController) else {
-                return
-            }
-            
-            pageControl.currentPage = currentIndex
+        guard let currentViewController = viewControllers?.first,
+              let currentIndex = weatherList.firstIndex(of: currentViewController) else {
+            return
+        }
+        
+        pageControl.currentPage = currentIndex
     }
     
     private func setupCityListButton() {
-           cityListViewButton.addTarget(self, action: #selector(setTabbar), for: .touchUpInside)
-           view.addSubview(cityListViewButton)
-            cityListViewButton.translatesAutoresizingMaskIntoConstraints = false
-           NSLayoutConstraint.activate([
+        cityListViewButton.addTarget(self, action: #selector(setTabbar), for: .touchUpInside)
+        view.addSubview(cityListViewButton)
+        cityListViewButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
             cityListViewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             cityListViewButton.centerYAnchor.constraint(equalTo: pageControl.centerYAnchor),
             cityListViewButton.widthAnchor.constraint(equalToConstant: 44),
             cityListViewButton.heightAnchor.constraint(equalToConstant: 44)
-           ])
-       }
+        ])
+    }
     
     @objc private func setTabbar() {
         let weatherListViewCon = WeatherListViewController()
@@ -196,37 +197,36 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
 extension PageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-            guard let viewControllerIndex = weatherList.firstIndex(of: viewController) else {
-                return nil
-            }
-            
-            let previousIndex = viewControllerIndex - 1
-            
-            guard previousIndex >= 0 else {
-                return nil
-            }
-            
-            return weatherList[previousIndex]
+        guard let viewControllerIndex = weatherList.firstIndex(of: viewController) else {
+            return nil
         }
         
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-            guard let viewControllerIndex = weatherList.firstIndex(of: viewController) else {
-                return nil
-            }
-            
-            let nextIndex = viewControllerIndex + 1
-            
-            guard nextIndex < weatherList.count else {
-                return nil
-            }
-            
-            return weatherList[nextIndex]
+        let previousIndex = viewControllerIndex - 1
+        
+        guard previousIndex >= 0 else {
+            return nil
         }
+        
+        return weatherList[previousIndex]
+    }
     
-    // PageControllView
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = weatherList.firstIndex(of: viewController) else {
+            return nil
+        }
+        
+        let nextIndex = viewControllerIndex + 1
+        
+        guard nextIndex < weatherList.count else {
+            return nil
+        }
+        
+        return weatherList[nextIndex]
+    }
+    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-            if completed {
-                updatePageControlAndButton()
-            }
+        if completed {
+            updatePageControlAndButton()
+        }
     }
 }

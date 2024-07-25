@@ -9,6 +9,6 @@ import Foundation
 
 class LocationService {
     static var shared = LocationService()
-           var longitude:Double!
-           var latitude:Double!
+    var longitude:Double!
+    var latitude:Double!
 }

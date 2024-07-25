@@ -12,7 +12,7 @@ final class WeatherView: UIView {
     var addNewCity = false
     
     // - MARK: Main Weather View Settings
-
+    
     private let weatherStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -193,20 +193,20 @@ extension WeatherView {
         weatherImage.image = UIImage(named: imageName)
         
         lowestTemperatureLabel.text =
-            "최저 "+String(data.temperature.minTemperature)+"°"
+        "최저 "+String(data.temperature.minTemperature)+"°"
         highestTemperatureLabel.text =
-            "최고 "+String(data.temperature.maxTemperature)+"°"
+        "최고 "+String(data.temperature.maxTemperature)+"°"
         
-        temperatureLabel.text = 
-            String(weatherData.temperature)+"°"
-        humidityLabel.text = 
-            "습도 "+String(weatherData.humidity)+"%"
-        rainProbabilityLabel.text = 
-            "강수확률 "+String(weatherData.rainProbability)+"%"
+        temperatureLabel.text =
+        String(weatherData.temperature)+"°"
+        humidityLabel.text =
+        "습도 "+String(weatherData.humidity)+"%"
+        rainProbabilityLabel.text =
+        "강수확률 "+String(weatherData.rainProbability)+"%"
         windDirectionLabel.text =
         windDirectionData.name+String(weatherData.windValue)+"m/s"
     }
-
+    
     // - MARK: Setting Constraint
     
     private func addSubView() {

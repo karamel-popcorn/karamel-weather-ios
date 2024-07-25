@@ -159,7 +159,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-    // MARK: - UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedResult = searchResults[indexPath.row]
@@ -206,12 +206,12 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
-    // MARK: - UISearchBarDelegate
+// MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     // 검색창의 text가 변하는 경우에 searchBar가 delegate에게 알리는데 사용하는 함수
-       func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-           // searchText를 queryFragment로 넘겨준다.
-           searchCompleter.queryFragment = searchText
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // searchText를 queryFragment로 넘겨준다.
+        searchCompleter.queryFragment = searchText
     }
 }
 

@@ -60,10 +60,10 @@ class HourlyWeatherCollectionViewCell: UICollectionViewCell {
     }()
     
     override init(frame: CGRect) {
-            super.init(frame: frame)
-            commoninit()
-        }
-
+        super.init(frame: frame)
+        commoninit()
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commoninit()

@@ -22,33 +22,33 @@ class SearchTableViewCell: UITableViewCell {
     
     // MARK: - LifeCycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setupAutoLayout()
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupAutoLayout()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-            super.setSelected(selected, animated: animated)
-            if selected {
-                self.backgroundColor = .init(white: 1.0, alpha: 0.1)
-            } else {
-                self.backgroundColor = .none
-            }
+        super.setSelected(selected, animated: animated)
+        if selected {
+            self.backgroundColor = .init(white: 1.0, alpha: 0.1)
+        } else {
+            self.backgroundColor = .none
+        }
     }
     
     required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Custom Method
     
     func setupAutoLayout() {
         self.addSubview(countryLabel)
-            
+        
         NSLayoutConstraint.activate([
             countryLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             countryLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
             countryLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 45),
         ])
-           
+        
     }
 }

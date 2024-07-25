@@ -71,7 +71,7 @@ class WeatherViewController: UIViewController {
         outerVisualEffectView.clipsToBounds = true
         return outerVisualEffectView
     }()
-   
+    
     
     let collectionBackView: UIView = {
         let view = UIView()
@@ -98,7 +98,7 @@ class WeatherViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
+    
     override func loadView() {
         super.loadView()
     }
@@ -148,15 +148,15 @@ class WeatherViewController: UIViewController {
     
     
     private func requestAuthorization() {
-            if locationManager == nil {
-                locationManager = CLLocationManager()
-                locationManager!.desiredAccuracy = kCLLocationAccuracyBest
-                locationManager!.requestWhenInUseAuthorization()
-                locationManager!.delegate = self
-                locationManagerDidChangeAuthorization(locationManager!)
-            }else{
-                locationManager!.startMonitoringSignificantLocationChanges()
-            }
+        if locationManager == nil {
+            locationManager = CLLocationManager()
+            locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager!.requestWhenInUseAuthorization()
+            locationManager!.delegate = self
+            locationManagerDidChangeAuthorization(locationManager!)
+        }else{
+            locationManager!.startMonitoringSignificantLocationChanges()
+        }
     }
     
     private func getCityList(at location: CLLocationCoordinate2D) {
@@ -186,7 +186,7 @@ class WeatherViewController: UIViewController {
             cityName = cityNumberData.cityName[0]
             cityNumber = cityNumberData.cityNumber
         }
-       
+        
         if(nowCitySet) {
             userInfo.nowCityName = cityName
             userInfo.nowCityNumber = cityNumber
@@ -238,9 +238,9 @@ class WeatherViewController: UIViewController {
     }
     
     @objc private func addCityButton() {
-      citySaveDate = Date().timeIntervalSince1970
+        citySaveDate = Date().timeIntervalSince1970
         let saveCityData = WeatherListItem(id: UUID(), cityNumber: self.cityNumber, cityName: self.cityName, createdAt: citySaveDate, latitude: self.locationLatitude, longitude: self.locationLongitude)
-      dataManager.saveWeatherList(item: saveCityData)
+        dataManager.saveWeatherList(item: saveCityData)
         NotificationCenter.default.post(name: NSNotification.Name("RefreshWeatherList"), object: nil)
         
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -281,12 +281,12 @@ extension WeatherViewController:CLLocationManagerDelegate {
             scrollUIStackView.trailingAnchor.constraint(equalTo: self.weatherScrollView.trailingAnchor),
             scrollUIStackView.widthAnchor.constraint(equalTo: weatherScrollView.widthAnchor, multiplier: 1.0),
             scrollUIStackView.heightAnchor.constraint(equalTo: weatherScrollView.contentLayoutGuide.heightAnchor),
-
+            
             weatherView.leadingAnchor.constraint(equalTo: self.scrollUIStackView.leadingAnchor),
             weatherView.topAnchor.constraint(equalTo: scrollUIStackView.topAnchor),
             weatherView.trailingAnchor.constraint(equalTo: self.scrollUIStackView.trailingAnchor),
             weatherView.heightAnchor.constraint(equalToConstant: weatherViewScreenHeight),
-
+            
             collectionBackView.leadingAnchor.constraint(equalTo: self.scrollUIStackView.leadingAnchor),
             collectionBackView.trailingAnchor.constraint(equalTo: self.scrollUIStackView.trailingAnchor),
             collectionBackView.topAnchor.constraint(equalTo: self.weatherView.bottomAnchor, constant: 20),
@@ -296,7 +296,7 @@ extension WeatherViewController:CLLocationManagerDelegate {
             collectionBackBlurView.topAnchor.constraint(equalTo: self.collectionBackView.topAnchor),
             collectionBackBlurView.trailingAnchor.constraint(equalTo: self.collectionBackView.trailingAnchor),
             collectionBackBlurView.heightAnchor.constraint(equalToConstant: 80),
-  
+            
             collectionView.leadingAnchor.constraint(equalTo: self.collectionBackBlurView.leadingAnchor),
             collectionView.topAnchor.constraint(equalTo: self.collectionBackBlurView.topAnchor),
             collectionView.trailingAnchor.constraint(equalTo: self.collectionBackBlurView.trailingAnchor),
@@ -350,6 +350,6 @@ extension WeatherViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: 50, height: 70)
+        return CGSize(width: 50, height: 70)
     }
 }

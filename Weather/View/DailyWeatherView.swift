@@ -727,7 +727,7 @@ extension DailyWeatherView {
         sevenWeekOfDayStackView.addArrangedSubview(sevenWeatherStateLabel)
         sevenWeekOfDayStackView.addArrangedSubview(sevenLowTemperature)
         sevenWeekOfDayStackView.addArrangedSubview(sevenHighTemperature)
-    
+        
     }
     
     // - MARK: SetUpConstraint
@@ -838,5 +838,5 @@ extension DailyWeatherView {
         let lastTime = dateFormatterStrirng.string(from:formatTime)
         return lastTime
     }
-
+    
 }

@@ -116,11 +116,11 @@ final class WeatherListViewController: UIViewController {
     }
     
     @objc func touchupWebButton(_ sender: UIButton) {
-            let application = UIApplication.shared
-            let weatherURL = URL(string: "https://weather.com/ko-KR/weather/today/")!
-            if application.canOpenURL(weatherURL) {
-                application.open(weatherURL, options: [:], completionHandler: nil)
-            }
+        let application = UIApplication.shared
+        let weatherURL = URL(string: "https://weather.com/ko-KR/weather/today/")!
+        if application.canOpenURL(weatherURL) {
+            application.open(weatherURL, options: [:], completionHandler: nil)
+        }
     }
 }
 
@@ -131,27 +131,26 @@ extension WeatherListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-          return indexPath.row != 0
-      }
+        return indexPath.row != 0
+    }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-           
-            if indexPath.row == 0 {
-                return nil
-            }
-    
-            let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-                tableView.beginUpdates()
-                WeatherListDataManager.shared.deleteWeatherList(id: self.weatherListItem[indexPath.row].id)
-                self.fetchWeather(manager: self.dataManager)
-                print(self.weatherListItem.count)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.endUpdates()
-                completionHandler(true)
-            }
-            action.backgroundColor = .red
-            return UISwipeActionsConfiguration(actions: [action])
+        
+        if indexPath.row == 0 {
+            return nil
         }
+        
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            tableView.beginUpdates()
+            WeatherListDataManager.shared.deleteWeatherList(id: self.weatherListItem[indexPath.row].id)
+            self.fetchWeather(manager: self.dataManager)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+            completionHandler(true)
+        }
+        action.backgroundColor = .red
+        return UISwipeActionsConfiguration(actions: [action])
+    }
 }
 
 extension WeatherListViewController: UITableViewDataSource {
@@ -159,7 +158,7 @@ extension WeatherListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-        
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 80
     }
@@ -187,7 +186,7 @@ extension WeatherListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         NotificationCenter.default.post(name: NSNotification.Name("refreshWeatherList"), object: nil, userInfo: ["selectedIndex": indexPath.row])
-           
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }

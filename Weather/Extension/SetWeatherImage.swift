@@ -23,27 +23,22 @@ struct SetWeatherImage {
             cloudy = "none"
         }
         
-        //눈비
         if(weather.rain != checkNone && weather.snow != checkNone) {
             return "snowcloud"
         }
         
-        // 번개
         if(weather.storm != checkNone) {
             return "storm"
         }
         
-        //비
         if(weather.rain != checkNone) {
             return "raini"
-        } 
+        }
         
-        //눈
         if(weather.snow != checkNone) {
             return "snow"
         }
         
-        //맑음
         if(getNowNightAndDay()) {
             switch cloudy {
             case "clean":
@@ -55,7 +50,7 @@ struct SetWeatherImage {
             default:
                 return ""
             }
-        } 
+        }
         
         switch cloudy {
         case "clean":
@@ -68,7 +63,7 @@ struct SetWeatherImage {
             return ""
         }
     }
-        
+    
     
     private func getNowNightAndDay() -> Bool {
         let formatter = DateFormatter()
@@ -99,22 +94,18 @@ struct SetWeatherImage {
             return "snowcloud"
         }
         
-        // 번개
         if(weather.storm != checkNone) {
             return "storm"
         }
         
-        //비
         if(weather.rain != checkNone) {
             return "raini"
         }
         
-        //눈
         if(weather.snow != checkNone) {
             return "snow"
         }
         
-        //맑음
         if(getHourlyNightAndDay(by: time)) {
             switch cloudy {
             case "clean":
@@ -148,22 +139,18 @@ struct SetWeatherImage {
             return "snowcloud"
         }
         
-        // 번개
         if(weather.storm != checkNone) {
             return "storm"
         }
         
-        //비
         if(weather.rain != checkNone) {
             return "raini"
         }
         
-        //눈
         if(weather.snow != checkNone) {
             return "snow"
         }
         
-        //맑음
         switch cloudy {
         case "clean":
             return "sunny"

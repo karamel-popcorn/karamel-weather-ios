@@ -35,17 +35,14 @@ struct SetWeatherState {
             return "눈구름"
         }
         
-        // 번개
         if(weatherData.storm != checkNone) {
             return "낙뢰"
         }
         
-        //비
         if(weatherData.rain != checkNone) {
             return "비"
         }
         
-        //눈
         if(weatherData.snow != checkNone) {
             return "눈"
         }
