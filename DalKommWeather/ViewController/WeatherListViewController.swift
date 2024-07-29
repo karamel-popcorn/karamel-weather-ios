@@ -21,7 +21,6 @@ final class WeatherListViewController: UIViewController {
     let nowDate = Date()
     
     private let userInfo = UserInfo.shared
-    private let semaphore = DispatchSemaphore(value: 0)
     
     // MARK: - Properties
     private let weatherListTableView: UITableView = {
