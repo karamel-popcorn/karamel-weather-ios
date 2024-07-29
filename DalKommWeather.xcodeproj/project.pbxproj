@@ -557,7 +557,7 @@
 				INFOPLIST_FILE = DalKommWeather/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "달콤한날씨";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 앱은 현재 위치를 사용하여 지역별 날씨 정보를 제공합니다.  위치 정보 사용을 허용하시겠습니까?";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 앱은 현재 위치를 사용하여 지역별 날씨 정보를 제공합니다.  위치 정보 사용을 허용하시겠습니까? 위치 정보 사용을 거부할 경우 기본 주소(서울특별시청)을 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
@@ -591,7 +591,7 @@
 				INFOPLIST_FILE = DalKommWeather/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "달콤한날씨";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 앱은 현재 위치를 사용하여 지역별 날씨 정보를 제공합니다.  위치 정보 사용을 허용하시겠습니까?";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 앱은 현재 위치를 사용하여 지역별 날씨 정보를 제공합니다.  위치 정보 사용을 허용하시겠습니까? 위치 정보 사용을 거부할 경우 기본 주소(서울특별시청)을 사용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = "";

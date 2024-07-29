@@ -23,6 +23,7 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
     private var currentLocation:CLLocationCoordinate2D!
     private let userInfo = UserInfo.shared
     private let dataManager = WeatherListDataManager.shared
+    let semaphore = DispatchSemaphore(value: 0)
     
     
     var weatherList:[UIViewController] = []
@@ -71,11 +72,7 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
         setupPageControl()
         setupCityListButton()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
+
     @objc private func refreshWeatherList(_ notification: Notification) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -119,7 +116,19 @@ class PageViewController: UIPageViewController, CLLocationManagerDelegate {
             
             userInfo.nowLocationLatitude = coordinate.latitude
             userInfo.nowLocationLongitude = coordinate.longitude
+        } else if manager.authorizationStatus == .denied || manager.authorizationStatus == .restricted {
+            showLocationDeniedAlert()
         }
+    }
+    
+    private func showLocationDeniedAlert() {
+        let alert = UIAlertController(
+            title: "위치 정보 사용 불가",
+            message: "위치 정보 사용 권한이 거부되어 현재 위치의 날씨 정보를 제공할 수 없습니다. 기본 위치(서울)의 날씨 정보를 표시합니다.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
     
     func setWeatherView() {

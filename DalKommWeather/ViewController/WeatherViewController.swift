@@ -159,12 +159,10 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    private func getCityList(at location: CLLocationCoordinate2D) {
+    private func getCityList() {
         if (locationLatitude == 0.0 && locationLongitude == 0.0) {
-            locationLatitude = location.latitude
-            locationLongitude = location.longitude
-            userInfo.nowLocationLatitude = locationLatitude
-            userInfo.nowLocationLongitude = locationLongitude
+            locationLatitude = userInfo.nowLocationLatitude
+            locationLongitude = userInfo.nowLocationLongitude
         }
         
         userLocationURL = URLCollection.getUserLocationURL+"latitude=\(locationLatitude)&longitude=\(locationLongitude)"
@@ -253,21 +251,31 @@ class WeatherViewController: UIViewController {
 // MARK: - Extension
 extension WeatherViewController:CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if manager.authorizationStatus == .notDetermined {
+            return
+        }
+        
         if manager.authorizationStatus == .authorizedWhenInUse {
             guard let coordinate = locationManager!.location?.coordinate else { return }
-            
-            self.getCityList(at: coordinate)
-            self.getHourlyWeather()
-            self.getDailyWeather()
-            guard let locationData = cityListData else { return }
-            guard let hourlyData = hourlyWeatherData else { return }
-            guard let dailyData = dailyWeatherData else { return }
-            weatherView.configureNowLocationData(at: locationData)
-            weatherView.configureNowWeatherData(at: hourlyData)
-            dailyWeatherView.setupDailyWeather(by: dailyData)
-            setBackGround()
-            setupWeatherUI()
+            if(userInfo.nowLocationLatitude == 0.0 && userInfo.nowLocationLongitude == 0.0) {
+                userInfo.nowLocationLatitude = coordinate.latitude
+                userInfo.nowLocationLongitude = coordinate.longitude
+            }
+        } else {
+            userInfo.nowLocationLatitude = 37.5665
+            userInfo.nowLocationLongitude = 126.9780
         }
+        self.getCityList()
+        self.getHourlyWeather()
+        self.getDailyWeather()
+        guard let locationData = cityListData else { return }
+        guard let hourlyData = hourlyWeatherData else { return }
+        guard let dailyData = dailyWeatherData else { return }
+        weatherView.configureNowLocationData(at: locationData)
+        weatherView.configureNowWeatherData(at: hourlyData)
+        dailyWeatherView.setupDailyWeather(by: dailyData)
+        setBackGround()
+        setupWeatherUI()
     }
     
     func setupConstraint() {
