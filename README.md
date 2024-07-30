@@ -80,7 +80,6 @@
 - [x] CoreData Model
 - [x] TableView Swipe
 - [x] Open API
-- [x] Core Location
 
 <br>
 
