@@ -79,7 +79,7 @@
 - [x] CoreData
 - [x] CoreData Model
 - [x] TableView Swipe
-- [x] Open API
+- [x] REST API
 
 <br>
 
